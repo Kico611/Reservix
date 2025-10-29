@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/styles/WeekNavigator.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761143901460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761143901460,
+            "name": "Commit-0",
+            "content": ".week-nav {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin: 0.5rem 0;\r\n  gap: 1rem;\r\n  color: #f0f0f0;\r\n}\r\n\r\n.week-nav button {\r\n  background-color: #1f1f1f;\r\n  color: #f0f0f0;\r\n  border: 1px solid #444;\r\n  padding: 6px 12px;\r\n  border-radius: 6px;\r\n  cursor: pointer;\r\n  font-weight: bold;\r\n  transition: all 0.2s;\r\n}\r\n\r\n.week-nav button:hover {\r\n  background-color: #3b82f6;\r\n  color: #fff;\r\n  border-color: #2563eb;\r\n}\r\n\r\n.week-nav span {\r\n  font-weight: bold;\r\n  font-size: 0.9rem;\r\n  background-color: #2a2a2a;\r\n  padding: 4px 10px;\r\n  border-radius: 6px;\r\n  border: 1px solid #444;\r\n}\r\n"
+        }
+    ]
+}

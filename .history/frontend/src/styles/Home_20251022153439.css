@@ -1,0 +1,546 @@
+body {
+  background-color: #181818;
+  color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0; /* Adjust for bottom nav */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigacija tjedna */
+.week-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+  gap: 1rem;
+  color: #f0f0f0;
+}
+.week-nav button {
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.week-nav button:hover {
+  background-color: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+.week-nav span {
+  font-weight: bold;
+  font-size: 0.9rem;
+  background-color: #2a2a2a;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+h2 {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+
+/* Table container */
+.table-container {
+  transition: transform 0.3s ease;
+  transform-origin: top left;
+  flex: 1;
+  overflow: auto;
+  width: 100%;
+  padding-bottom: 0px;
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 900px;
+  width: 100%;
+  height: calc(100vh - 100px); /* nav + tjedan + bottom nav */
+}
+table thead th {
+  font-size: 1rem;
+  padding: 0.6rem;
+  font-weight: 500;
+}
+th,
+td {
+  border: 1px solid #444;
+  text-align: center;
+  white-space: normal;
+  padding: 3px;
+  font-size: 0.65rem;
+  line-height: 1em;
+  width: 60px;
+  box-sizing: border-box;
+}
+
+/* Header intervala */
+th {
+  background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20; /* Header iznad svega */
+  font-weight: 600;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #444;
+}
+
+/* Sticky prvi stupac (dani) */
+.day-cell {
+  position: sticky;
+  left: 0;
+  background: linear-gradient(to right, #2a2a2a, #1f1f1f);
+  opacity: 95%;
+  z-index: 10; /* Ispod headera */
+  font-weight: 540;
+  font-size: 1rem;
+  min-width: 65px;
+  max-width: 75px;
+  transition: background-color 0.2s;
+  border-right: 1px solid #444;
+  text-align: LEFT;
+  padding-left: 1rem;
+  color: #f0f0f0;
+}
+
+/* Gornji lijevi kut */
+table th:first-child {
+  left: 0;
+  z-index: 30; /* uvijek iznad headera i prvog stupca */
+}
+
+/* Booked cells */
+td.booked {
+  background: linear-gradient(
+    135deg,
+    #4f8ef7,
+    #1d3fa3
+  ); /* svježiji plavi gradient */
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px; /* mekše zaobljene ivice */
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.8rem;
+  line-height: 1em;
+  padding: 4px 6px; /* više prostora unutar ćelije */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* mekša, realističnija sjena */
+}
+
+/* Hover efekt */
+td.booked:hover {
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  transform: translateY(-2px); /* lagani "lift" efekt */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); /* jača sjena na hover */
+  cursor: pointer;
+}
+
+td.booked span {
+  display: block;
+  font-size: 0.4rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+td:not(.booked):hover {
+  background-color: #333;
+  cursor: pointer;
+}
+.day-cell:hover {
+  background-color: #444;
+  cursor: default;
+}
+.table-container th:hover {
+  background-color: #3b3b3b;
+  cursor: default;
+}
+
+/* Bottom nav fix */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #111;
+  border-top: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #fff;
+  z-index: 5;
+}
+
+/* Ostale ćelije */
+td.empty-cell {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 8px;
+  background-color: #333;
+  border: 1px;
+  max-width: 50px;
+  white-space: normal;
+  overflow: hidden;
+}
+.no-schedule {
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  padding: 70px 0;
+  font-size: 1.2rem;
+  overflow: hidden;
+}
+
+/* Zebra pattern za dane */
+tbody tr:nth-child(odd) td.day-cell {
+  background-color: #2f2f2f;
+}
+tbody tr:nth-child(even) td.day-cell {
+  background-color: #2a2a2a;
+}
+
+/* Vikend boja */
+tbody tr td.day-cell:nth-child(6),
+tbody tr td.day-cell:nth-child(7) {
+  background-color: #222;
+  color: #ff9a9a;
+}
+
+/* Responsive mobitel */
+@media (max-width: 768px) {
+  .zoom-controls {
+    display: none;
+  }
+  table {
+    font-size: 0.6rem;
+    min-width: 750px;
+  }
+  th,
+  td {
+    padding: 3px;
+    font-size: 1rem;
+  }
+  .day-cell {
+    min-width: 50px;
+    max-width: 70px;
+    padding-right: 1rem;
+  }
+  table thead th {
+    padding: 0.45rem;
+    font-weight: 500;
+  }
+}
+
+/* Zoom kontrole */
+.zoom-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+.zoom-controls button {
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.zoom-controls button:hover {
+  background-color: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+.zoom-controls span {
+  font-weight: bold;
+  font-size: 0.9rem;
+  background-color: #2a2a2a;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+@media (min-width: 769px) {
+  table {
+    height: calc(100vh - 153px); /* nav + tjedan + zoom + bottom nav */
+  }
+}
+
+/* Modal pozadina */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* tamna pozadina */
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease-in-out;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Animacija fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal sadržaj */
+.modal-content {
+  background: #ffffff;
+  color: #1f1f1f;
+  padding: 30px 35px;
+  border-radius: 14px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  animation: slideUp 0.25s ease-out;
+  line-height: 1.5; /* malo veći razmak između redaka */
+}
+
+/* Animacija dolaska modal-a */
+@keyframes slideUp {
+  from {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Naslov */
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Paragraf */
+.modal-content p {
+  margin: 6px 0;
+  font-size: 1.05rem;
+  color: #222222;
+  word-break: break-word;
+}
+
+/* Glavni button */
+.modal-content button {
+  margin-top: 18px;
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.modal-content button:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Sekundarni button (zatvori) */
+.modal-content button.close-btn {
+  background-color: #f0f0f0;
+  color: #1f1f1f;
+}
+
+.modal-content button.close-btn:hover {
+  background-color: #dcdcdc;
+}
+
+/* Dugme za otkazivanje rezervacije */
+.modal-content button.cancel-reservation-btn {
+  margin-top: 10px;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ef4444; /* crveno */
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-content button.cancel-reservation-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+td.booked.cancelled {
+  background-color: #f8d7da !important; /* force */
+  color: #721c24 !important;
+  text-decoration: line-through;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(150%);
+  animation: slideIn 0.3s forwards, fadeOut 0.3s 3.5s forwards;
+  font-size: 1.1rem;
+  font-family: Arial, sans-serif;
+}
+
+/* Boje */
+.notification.success {
+  background-color: #16a34a; /* zeleno */
+}
+
+.notification.error {
+  background-color: #dc2626; /* crveno */
+}
+
+/* Animacije */
+@keyframes slideIn {
+  from {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Reservation form unutar modala */
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #1f1f1f;
+  font-family: Arial, sans-serif;
+}
+
+.reservation-form h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.reservation-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.reservation-form label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.reservation-form select,
+.reservation-form input[type="text"] {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.reservation-form input[disabled] {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+.reservation-form .form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.reservation-form button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.reservation-form button:first-child {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.reservation-form button:first-child:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.reservation-form button:last-child {
+  background-color: #f0f0f0;
+  color: #1f1f1f;
+}
+
+.reservation-form button:last-child:hover {
+  background-color: #dcdcdc;
+}

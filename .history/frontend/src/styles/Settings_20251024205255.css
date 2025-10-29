@@ -1,0 +1,182 @@
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 12px 1rem 1rem 1rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Kartice usluga */
+.service-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  background-color: #2a2a2a;
+  padding: 14px 16px;
+  border-radius: 10px;
+  color: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+  background-color: #383838;
+}
+
+/* Info unutar kartice */
+.service-info p {
+  margin: 3px 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Dugmad unutar kartice */
+.service-actions button {
+  margin-left: 10px;
+  padding: 6px 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-size: 0.95rem;
+}
+
+.edit-btn {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #2563eb;
+}
+
+.delete-btn {
+  background-color: #b22222;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #8b1a1a;
+}
+
+.add-btn-settings {
+  margin-top: 1rem;
+  padding: 10px 16px;
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: all 0.25s;
+}
+
+.add-btn-settings:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay i modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.25s ease-in-out;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sadržaj modala */
+.modal-content {
+  background-color: #ffffff;
+  color: #1f1f1f;
+  padding: 28px 32px;
+  border-radius: 12px;
+  min-width: 340px;
+  max-width: 460px;
+  width: 90%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  line-height: 1.5;
+  animation: slideUp 0.25s ease-out;
+  position: relative;
+}
+
+/* Fade i slide animacije */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Polja unutar modala */
+.modal-field {
+  margin-bottom: 16px;
+}
+
+.modal-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #222;
+  font-size: 1rem;
+}
+
+.modal-field input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Akcijske tipke */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+
+.modal-content .modal-delete-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ef4444; /* crveno */
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.modal-content .modal-delete-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

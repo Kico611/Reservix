@@ -1,0 +1,23 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: "Arial", sans-serif;
+  background-color: #181818; /* Tamno siva, ne potpuno crna */
+  color: #fff;
+}
+
+/* Main content */
+.content {
+  flex: 1;
+  padding: 0px;
+  overflow-y: auto;
+  background-color: #181818; /* Tamno siva za sadržaj */
+}

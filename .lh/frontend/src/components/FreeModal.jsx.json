@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/components/FreeModal.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761142248940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761142248940,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\n\r\nexport default function FreeModal({ selectedTerm, onClose, onConfirm }) {\r\n  if (!selectedTerm) return null;\r\n\r\n  return (\r\n    <div className=\"modal-backdrop\" onClick={onClose}>\r\n      <div className=\"modal-content\" onClick={(e) => e.stopPropagation()}>\r\n        <h3>Potvrda oslobađanja termina</h3>\r\n        <p>\r\n          Jeste li sigurni da želite osloboditi termin {selectedTerm.term?.od} - {selectedTerm.term?.do}?\r\n        </p>\r\n        <div className=\"modal-actions\">\r\n          <button className=\"cancel-btn\" onClick={onClose}>Odustani</button>\r\n          <button className=\"modal-delete-btn\" onClick={() => onConfirm(selectedTerm)}>Potvrdi oslobađanje</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

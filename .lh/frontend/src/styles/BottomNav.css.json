@@ -1,0 +1,42 @@
+{
+    "sourceFile": "frontend/src/styles/BottomNav.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1761323044368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761326178468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n   position: fixed;\r\n   bottom: 0;\r\n   width: 100%;\r\n   border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n-  z-index: 20;;\r\n+  z-index: 20;\r\n+  padding-top:10px;\r\n }\r\n \r\n .bottom-nav a {\r\n   display: flex;\r\n"
+                },
+                {
+                    "date": 1761326188618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   bottom: 0;\r\n   width: 100%;\r\n   border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n   z-index: 20;\r\n-  padding-top:10px;\r\n+  margin-top:10px;\r\n }\r\n \r\n .bottom-nav a {\r\n   display: flex;\r\n"
+                },
+                {
+                    "date": 1761326197593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,9 @@\n   position: fixed;\r\n   bottom: 0;\r\n   width: 100%;\r\n   border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n-  z-index: 20;\r\n-  margin-top:10px;\r\n+  z-index: 15;\r\n }\r\n \r\n .bottom-nav a {\r\n   display: flex;\r\n"
+                },
+                {
+                    "date": 1761326454724,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   position: fixed;\r\n   bottom: 0;\r\n   width: 100%;\r\n   border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n-  z-index: 15;\r\n+  z-index: 20;\r\n }\r\n \r\n .bottom-nav a {\r\n   display: flex;\r\n"
+                },
+                {
+                    "date": 1761326476411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n   background-color: rgba(24, 24, 24, 0.85);\r\n   backdrop-filter: blur(10px);\r\n   padding: 10px 0;\r\n   position: fixed;\r\n-  bottom: 0;\r\n   width: 100%;\r\n   border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n   z-index: 20;\r\n }\r\n"
+                },
+                {
+                    "date": 1761326561059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n   display: flex;\r\n   justify-content: space-around;\r\n   background-color: rgba(24, 24, 24, 0.85);\r\n   backdrop-filter: blur(10px);\r\n-  padding: 10px 0;\r\n   position: fixed;\r\n   width: 100%;\r\n   border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n   z-index: 20;\r\n"
+                }
+            ],
+            "date": 1761323044368,
+            "name": "Commit-0",
+            "content": ".bottom-nav {\r\n  display: flex;\r\n  justify-content: space-around;\r\n  background-color: rgba(24, 24, 24, 0.85);\r\n  backdrop-filter: blur(10px);\r\n  padding: 10px 0;\r\n  position: fixed;\r\n  bottom: 0;\r\n  width: 100%;\r\n  border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n  z-index: 20;;\r\n}\r\n\r\n.bottom-nav a {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  font-size: 12px;\r\n  color: rgba(255, 255, 255, 0.5);\r\n  text-decoration: none;\r\n  transition: all 0.3s ease;\r\n}\r\n\r\n.bottom-nav a:hover {\r\n  color: rgba(255, 255, 255, 0.7);\r\n}\r\n\r\n.bottom-nav a.active {\r\n  color: #ffffff;\r\n}\r\n\r\n.icon {\r\n  font-size: 24px;\r\n  margin-bottom: 4px;\r\n  transition: transform 0.3s ease, color 0.3s ease;\r\n}\r\n\r\n.bottom-nav a.active .icon {\r\n  transform: scale(1.2);\r\n}\r\n\r\n.bottom-nav a .label {\r\n  font-size: 11px;\r\n  color: inherit;\r\n  transition: color 0.3s ease;\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .bottom-nav a .label {\r\n    font-size: 10px;\r\n  }\r\n  .icon {\r\n    font-size: 20px;\r\n  }\r\n}\r\n"
+        }
+    ]
+}

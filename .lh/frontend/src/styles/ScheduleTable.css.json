@@ -1,0 +1,402 @@
+{
+    "sourceFile": "frontend/src/styles/ScheduleTable.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 96,
+            "patches": [
+                {
+                    "date": 1761141370677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761141515734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,72 +1,60 @@\n-/* === Table container === */\r\n .table-container {\r\n+  transition: transform 0.3s ease;\r\n+  transform-origin: top left;\r\n   flex: 1;\r\n   overflow: auto;\r\n   width: 100%;\r\n   padding-bottom: 0px;\r\n   box-sizing: border-box;\r\n-  transition: transform 0.3s ease;\r\n-  transform-origin: top left;\r\n }\r\n \r\n-/* === Table styling === */\r\n table {\r\n   border-collapse: collapse;\r\n+  min-width: 900px;\r\n   width: 100%;\r\n-  min-width: 900px;\r\n }\r\n-\r\n-thead th {\r\n+table thead th {\r\n   font-size: 1rem;\r\n   padding: 0.6rem;\r\n   font-weight: 500;\r\n-  text-align: center;\r\n+}\r\n+\r\n+/* Header intervala */\r\n+th {\r\n   background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);\r\n   color: #fff;\r\n   position: sticky;\r\n   top: 0;\r\n   z-index: 20;\r\n+  font-weight: 600;\r\n   border-bottom: 1px solid #444;\r\n }\r\n \r\n-th.hour-cell {\r\n-  width: 60px;\r\n-}\r\n-\r\n-td, th {\r\n-  border: 1px solid #444;\r\n-  text-align: center;\r\n-  white-space: normal;\r\n-  padding: 3px;\r\n-  font-size: 0.65rem;\r\n-  line-height: 1em;\r\n-  box-sizing: border-box;\r\n-}\r\n-\r\n-/* === Sticky first column (day names) === */\r\n+/* Sticky prvi stupac (dani) */\r\n .day-cell {\r\n   position: sticky;\r\n   left: 0;\r\n   background: linear-gradient(to right, #2a2a2a, #1f1f1f);\r\n-  opacity: 0.95;\r\n+  opacity: 95%;\r\n   z-index: 10;\r\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n+  border-right: 1px solid #444;\r\n+  text-align: left;\r\n   padding-left: 1rem;\r\n-  text-align: left;\r\n   color: #f0f0f0;\r\n-  border-right: 1px solid #444;\r\n }\r\n \r\n+/* Gornji lijevi kut */\r\n table th:first-child {\r\n   left: 0;\r\n-  z-index: 30; /* uvijek iznad headera i prvog stupca */\r\n+  z-index: 30;\r\n }\r\n \r\n-/* === Booked cells === */\r\n+/* Booked cells */\r\n td.booked {\r\n   background: linear-gradient(135deg, #4f8ef7, #1d3fa3);\r\n   color: #fff;\r\n   font-weight: 600;\r\n@@ -75,76 +63,57 @@\n   vertical-align: middle;\r\n   font-size: 0.8rem;\r\n   line-height: 1em;\r\n   padding: 4px 6px;\r\n+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;\r\n   white-space: nowrap;\r\n   overflow: hidden;\r\n   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\r\n-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;\r\n }\r\n-\r\n td.booked:hover {\r\n   background: linear-gradient(135deg, #2563eb, #1e3a8a);\r\n   transform: translateY(-2px);\r\n   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);\r\n   cursor: pointer;\r\n }\r\n-\r\n td.booked.cancelled {\r\n   background-color: #f8d7da !important;\r\n   color: #721c24 !important;\r\n   text-decoration: line-through;\r\n   box-shadow: none;\r\n   cursor: not-allowed;\r\n }\r\n \r\n-/* === Free cells === */\r\n+/* Free cells */\r\n td:not(.booked):hover {\r\n   background-color: #333;\r\n   cursor: pointer;\r\n }\r\n \r\n-/* === Empty cell (no schedule) === */\r\n td.empty-cell {\r\n   text-align: center;\r\n   color: #aaa;\r\n   font-style: italic;\r\n   font-size: 0.9rem;\r\n   padding: 8px;\r\n   background-color: #333;\r\n-  border: 1px;\r\n   max-width: 50px;\r\n   white-space: normal;\r\n   overflow: hidden;\r\n }\r\n \r\n-/* === Zebra pattern for day column === */\r\n-tbody tr:nth-child(odd) td.day-cell {\r\n-  background-color: #2f2f2f;\r\n-}\r\n-tbody tr:nth-child(even) td.day-cell {\r\n-  background-color: #2a2a2a;\r\n-}\r\n-\r\n-/* Weekend highlight */\r\n+/* Zebra pattern */\r\n+tbody tr:nth-child(odd) td.day-cell { background-color: #2f2f2f; }\r\n+tbody tr:nth-child(even) td.day-cell { background-color: #2a2a2a; }\r\n+/* Vikend boja */\r\n tbody tr td.day-cell:nth-child(6),\r\n-tbody tr td.day-cell:nth-child(7) {\r\n-  background-color: #222;\r\n-  color: #ff9a9a;\r\n-}\r\n+tbody tr td.day-cell:nth-child(7) { background-color: #222; color: #ff9a9a; }\r\n \r\n-/* === Responsive for mobile === */\r\n+/* Responsive */\r\n @media (max-width: 768px) {\r\n-  table {\r\n-    font-size: 0.6rem;\r\n-    min-width: 350px;\r\n-  }\r\n-  th, td {\r\n-    padding: 3px;\r\n-    font-size: 0.8rem;\r\n-  }\r\n-  .day-cell {\r\n-    min-width: 50px;\r\n-    max-width: 70px;\r\n-    padding-left: 0.8rem;\r\n-  }\r\n+  table { font-size: 0.6rem; min-width: 750px; }\r\n+  th, td { padding: 3px; font-size: 1rem; }\r\n+  .day-cell { min-width: 50px; max-width: 70px; padding-right: 1rem; }\r\n }\r\n+@media (min-width: 769px) {\r\n+  table { height: calc(100vh - 153px); }\r\n+}\r\n"
+                },
+                {
+                    "date": 1761141620731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,33 +1,45 @@\n+/* ScheduleTable.css */\r\n+\r\n+/* Table container */\r\n .table-container {\r\n-  transition: transform 0.3s ease;\r\n-  transform-origin: top left;\r\n   flex: 1;\r\n   overflow: auto;\r\n   width: 100%;\r\n   padding-bottom: 0px;\r\n   box-sizing: border-box;\r\n+  transition: transform 0.3s ease;\r\n+  transform-origin: top left;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n+  height: calc(100vh - 100px); /* header + tjedan + bottom nav */\r\n }\r\n-table thead th {\r\n-  font-size: 1rem;\r\n-  padding: 0.6rem;\r\n-  font-weight: 500;\r\n+\r\n+th,\r\n+td {\r\n+  border: 1px solid #444;\r\n+  text-align: center;\r\n+  white-space: normal;\r\n+  padding: 3px;\r\n+  font-size: 0.65rem;\r\n+  line-height: 1em;\r\n+  width: 60px;\r\n+  box-sizing: border-box;\r\n }\r\n \r\n /* Header intervala */\r\n-th {\r\n+table thead th {\r\n   background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);\r\n   color: #fff;\r\n   position: sticky;\r\n   top: 0;\r\n   z-index: 20;\r\n   font-weight: 600;\r\n+  transition: background-color 0.2s;\r\n   border-bottom: 1px solid #444;\r\n }\r\n \r\n /* Sticky prvi stupac (dani) */\r\n@@ -40,8 +52,9 @@\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n+  transition: background-color 0.2s;\r\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n@@ -49,9 +62,9 @@\n \r\n /* Gornji lijevi kut */\r\n table th:first-child {\r\n   left: 0;\r\n-  z-index: 30;\r\n+  z-index: 30; /* uvijek iznad headera i prvog stupca */\r\n }\r\n \r\n /* Booked cells */\r\n td.booked {\r\n@@ -68,52 +81,76 @@\n   white-space: nowrap;\r\n   overflow: hidden;\r\n   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\r\n }\r\n+\r\n td.booked:hover {\r\n   background: linear-gradient(135deg, #2563eb, #1e3a8a);\r\n   transform: translateY(-2px);\r\n   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);\r\n   cursor: pointer;\r\n }\r\n+\r\n td.booked.cancelled {\r\n   background-color: #f8d7da !important;\r\n   color: #721c24 !important;\r\n   text-decoration: line-through;\r\n   box-shadow: none;\r\n   cursor: not-allowed;\r\n }\r\n \r\n-/* Free cells */\r\n-td:not(.booked):hover {\r\n-  background-color: #333;\r\n-  cursor: pointer;\r\n-}\r\n-\r\n td.empty-cell {\r\n   text-align: center;\r\n   color: #aaa;\r\n   font-style: italic;\r\n   font-size: 0.9rem;\r\n   padding: 8px;\r\n   background-color: #333;\r\n+  border: 1px solid #444;\r\n   max-width: 50px;\r\n   white-space: normal;\r\n   overflow: hidden;\r\n }\r\n \r\n-/* Zebra pattern */\r\n-tbody tr:nth-child(odd) td.day-cell { background-color: #2f2f2f; }\r\n-tbody tr:nth-child(even) td.day-cell { background-color: #2a2a2a; }\r\n+/* Zebra pattern za dane */\r\n+tbody tr:nth-child(odd) td.day-cell {\r\n+  background-color: #2f2f2f;\r\n+}\r\n+tbody tr:nth-child(even) td.day-cell {\r\n+  background-color: #2a2a2a;\r\n+}\r\n+\r\n /* Vikend boja */\r\n tbody tr td.day-cell:nth-child(6),\r\n-tbody tr td.day-cell:nth-child(7) { background-color: #222; color: #ff9a9a; }\r\n+tbody tr td.day-cell:nth-child(7) {\r\n+  background-color: #222;\r\n+  color: #ff9a9a;\r\n+}\r\n \r\n-/* Responsive */\r\n+/* Responsive mobitel */\r\n @media (max-width: 768px) {\r\n-  table { font-size: 0.6rem; min-width: 750px; }\r\n-  th, td { padding: 3px; font-size: 1rem; }\r\n-  .day-cell { min-width: 50px; max-width: 70px; padding-right: 1rem; }\r\n+  table {\r\n+    font-size: 0.6rem;\r\n+    min-width: 750px;\r\n+  }\r\n+  th,\r\n+  td {\r\n+    padding: 3px;\r\n+    font-size: 1rem;\r\n+  }\r\n+  .day-cell {\r\n+    min-width: 50px;\r\n+    max-width: 70px;\r\n+    padding-right: 1rem;\r\n+  }\r\n+  table thead th {\r\n+    padding: 0.45rem;\r\n+    font-weight: 500;\r\n+  }\r\n }\r\n+\r\n+/* Veća visina tablice za desktop */\r\n @media (min-width: 769px) {\r\n-  table { height: calc(100vh - 153px); }\r\n+  table {\r\n+    height: calc(100vh - 153px); /* nav + tjedan + zoom + bottom nav */\r\n+  }\r\n }\r\n"
+                },
+                {
+                    "date": 1761141789149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,9 @@\n-/* ScheduleTable.css */\r\n-\r\n-/* Table container */\r\n .table-container {\r\n   flex: 1;\r\n   overflow: auto;\r\n   width: 100%;\r\n-  padding-bottom: 0px;\r\n+  padding-bottom: 0;\r\n   box-sizing: border-box;\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n }\r\n@@ -14,13 +11,12 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 100px); /* header + tjedan + bottom nav */\r\n+  height: calc(100vh - 100px); /* prilagodi ako ima header + tjedan + bottom nav */\r\n }\r\n \r\n-th,\r\n-td {\r\n+th, td {\r\n   border: 1px solid #444;\r\n   text-align: center;\r\n   white-space: normal;\r\n   padding: 3px;\r\n@@ -62,9 +58,9 @@\n \r\n /* Gornji lijevi kut */\r\n table th:first-child {\r\n   left: 0;\r\n-  z-index: 30; /* uvijek iznad headera i prvog stupca */\r\n+  z-index: 30;\r\n }\r\n \r\n /* Booked cells */\r\n td.booked {\r\n@@ -79,18 +75,16 @@\n   padding: 4px 6px;\r\n   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;\r\n   white-space: nowrap;\r\n   overflow: hidden;\r\n-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\r\n+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);\r\n }\r\n-\r\n td.booked:hover {\r\n   background: linear-gradient(135deg, #2563eb, #1e3a8a);\r\n   transform: translateY(-2px);\r\n-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);\r\n+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);\r\n   cursor: pointer;\r\n }\r\n-\r\n td.booked.cancelled {\r\n   background-color: #f8d7da !important;\r\n   color: #721c24 !important;\r\n   text-decoration: line-through;\r\n@@ -111,14 +105,10 @@\n   overflow: hidden;\r\n }\r\n \r\n /* Zebra pattern za dane */\r\n-tbody tr:nth-child(odd) td.day-cell {\r\n-  background-color: #2f2f2f;\r\n-}\r\n-tbody tr:nth-child(even) td.day-cell {\r\n-  background-color: #2a2a2a;\r\n-}\r\n+tbody tr:nth-child(odd) td.day-cell { background-color: #2f2f2f; }\r\n+tbody tr:nth-child(even) td.day-cell { background-color: #2a2a2a; }\r\n \r\n /* Vikend boja */\r\n tbody tr td.day-cell:nth-child(6),\r\n tbody tr td.day-cell:nth-child(7) {\r\n@@ -127,30 +117,14 @@\n }\r\n \r\n /* Responsive mobitel */\r\n @media (max-width: 768px) {\r\n-  table {\r\n-    font-size: 0.6rem;\r\n-    min-width: 750px;\r\n-  }\r\n-  th,\r\n-  td {\r\n-    padding: 3px;\r\n-    font-size: 1rem;\r\n-  }\r\n-  .day-cell {\r\n-    min-width: 50px;\r\n-    max-width: 70px;\r\n-    padding-right: 1rem;\r\n-  }\r\n-  table thead th {\r\n-    padding: 0.45rem;\r\n-    font-weight: 500;\r\n-  }\r\n+  table { font-size: 0.6rem; min-width: 750px; }\r\n+  th, td { padding: 3px; font-size: 1rem; }\r\n+  .day-cell { min-width: 50px; max-width: 70px; padding-right: 1rem; }\r\n+  table thead th { padding: 0.45rem; font-weight: 500; }\r\n }\r\n \r\n /* Veća visina tablice za desktop */\r\n @media (min-width: 769px) {\r\n-  table {\r\n-    height: calc(100vh - 153px); /* nav + tjedan + zoom + bottom nav */\r\n-  }\r\n+  table { height: calc(100vh - 153px); } /* nav + tjedan + zoom + bottom nav */\r\n }\r\n"
+                },
+                {
+                    "date": 1761143939360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,27 @@\n .table-container {\r\n+  transition: transform 0.3s ease;\r\n+  transform-origin: top left;\r\n   flex: 1;\r\n   overflow: auto;\r\n   width: 100%;\r\n-  padding-bottom: 0;\r\n+  padding-bottom: 0px;\r\n   box-sizing: border-box;\r\n-  transition: transform 0.3s ease;\r\n-  transform-origin: top left;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 100px); /* prilagodi ako ima header + tjedan + bottom nav */\r\n+  height: calc(100vh - 100px);\r\n }\r\n \r\n+table thead th {\r\n+  font-size: 1rem;\r\n+  padding: 0.6rem;\r\n+  font-weight: 500;\r\n+}\r\n+\r\n th, td {\r\n   border: 1px solid #444;\r\n   text-align: center;\r\n   white-space: normal;\r\n@@ -25,10 +31,9 @@\n   width: 60px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n-/* Header intervala */\r\n-table thead th {\r\n+th {\r\n   background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);\r\n   color: #fff;\r\n   position: sticky;\r\n   top: 0;\r\n@@ -37,9 +42,8 @@\n   transition: background-color 0.2s;\r\n   border-bottom: 1px solid #444;\r\n }\r\n \r\n-/* Sticky prvi stupac (dani) */\r\n .day-cell {\r\n   position: sticky;\r\n   left: 0;\r\n   background: linear-gradient(to right, #2a2a2a, #1f1f1f);\r\n@@ -55,15 +59,14 @@\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n }\r\n \r\n-/* Gornji lijevi kut */\r\n table th:first-child {\r\n   left: 0;\r\n   z-index: 30;\r\n }\r\n \r\n-/* Booked cells */\r\n+/* booked cells */\r\n td.booked {\r\n   background: linear-gradient(135deg, #4f8ef7, #1d3fa3);\r\n   color: #fff;\r\n   font-weight: 600;\r\n@@ -77,54 +80,63 @@\n   white-space: nowrap;\r\n   overflow: hidden;\r\n   box-shadow: 0 4px 12px rgba(0,0,0,0.25);\r\n }\r\n+\r\n td.booked:hover {\r\n   background: linear-gradient(135deg, #2563eb, #1e3a8a);\r\n   transform: translateY(-2px);\r\n   box-shadow: 0 6px 18px rgba(0,0,0,0.35);\r\n   cursor: pointer;\r\n }\r\n-td.booked.cancelled {\r\n-  background-color: #f8d7da !important;\r\n-  color: #721c24 !important;\r\n-  text-decoration: line-through;\r\n-  box-shadow: none;\r\n-  cursor: not-allowed;\r\n+\r\n+td.booked span {\r\n+  display: block;\r\n+  font-size: 0.4rem;\r\n+  text-overflow: ellipsis;\r\n+  overflow: hidden;\r\n }\r\n \r\n-td.empty-cell {\r\n-  text-align: center;\r\n-  color: #aaa;\r\n-  font-style: italic;\r\n-  font-size: 0.9rem;\r\n-  padding: 8px;\r\n+td:not(.booked):hover {\r\n   background-color: #333;\r\n-  border: 1px solid #444;\r\n-  max-width: 50px;\r\n-  white-space: normal;\r\n-  overflow: hidden;\r\n+  cursor: pointer;\r\n }\r\n \r\n-/* Zebra pattern za dane */\r\n+.day-cell:hover {\r\n+  background-color: #444;\r\n+  cursor: default;\r\n+}\r\n+\r\n+.table-container th:hover {\r\n+  background-color: #3b3b3b;\r\n+  cursor: default;\r\n+}\r\n+\r\n+/* zebra i vikend boje */\r\n tbody tr:nth-child(odd) td.day-cell { background-color: #2f2f2f; }\r\n tbody tr:nth-child(even) td.day-cell { background-color: #2a2a2a; }\r\n-\r\n-/* Vikend boja */\r\n tbody tr td.day-cell:nth-child(6),\r\n-tbody tr td.day-cell:nth-child(7) {\r\n-  background-color: #222;\r\n-  color: #ff9a9a;\r\n-}\r\n+tbody tr td.day-cell:nth-child(7) { background-color: #222; color: #ff9a9a; }\r\n \r\n-/* Responsive mobitel */\r\n @media (max-width: 768px) {\r\n   table { font-size: 0.6rem; min-width: 750px; }\r\n   th, td { padding: 3px; font-size: 1rem; }\r\n   .day-cell { min-width: 50px; max-width: 70px; padding-right: 1rem; }\r\n   table thead th { padding: 0.45rem; font-weight: 500; }\r\n }\r\n \r\n-/* Veća visina tablice za desktop */\r\n @media (min-width: 769px) {\r\n-  table { height: calc(100vh - 153px); } /* nav + tjedan + zoom + bottom nav */\r\n+  table { height: calc(100vh - 153px); }\r\n }\r\n+\r\n+td.empty-cell {\r\n+  text-align: center;\r\n+  color: #aaa;\r\n+  font-style: italic;\r\n+  font-size: 0.9rem;\r\n+  padding: 8px;\r\n+  background-color: #333;\r\n+  border: 1px;\r\n+  max-width: 50px;\r\n+  white-space: normal;\r\n+  overflow: hidden;\r\n+}\r\n"
+                },
+                {
+                    "date": 1761321743151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -127,16 +127,16 @@\n @media (min-width: 769px) {\r\n   table { height: calc(100vh - 153px); }\r\n }\r\n \r\n+/* Stil za prazne ćelije (nema radnog vremena) */\r\n td.empty-cell {\r\n-  text-align: center;\r\n+  text-align: left; /* lijevo poravnanje */\r\n+  padding-left: 1rem; /* udaljenost od početka ćelije */\r\n   color: #aaa;\r\n   font-style: italic;\r\n   font-size: 0.9rem;\r\n-  padding: 8px;\r\n   background-color: #333;\r\n-  border: 1px;\r\n-  max-width: 50px;\r\n+  border: 1px solid #444;\r\n   white-space: normal;\r\n   overflow: hidden;\r\n }\r\n"
+                },
+                {
+                    "date": 1761321984358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow: auto;\r\n   width: 100%;\r\n-  padding-bottom: 0px;\r\n+  padding-bottom: 5px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761322229175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow: auto;\r\n   width: 100%;\r\n-  padding-bottom: 5px;\r\n+  padding-bottom: 75px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761322264711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -124,9 +124,9 @@\n   table thead th { padding: 0.45rem; font-weight: 500; }\r\n }\r\n \r\n @media (min-width: 769px) {\r\n-  table { height: calc(100vh - 153px); }\r\n+  table { height: calc(100vh - 140px); }\r\n }\r\n \r\n /* Stil za prazne ćelije (nema radnog vremena) */\r\n td.empty-cell {\r\n"
+                },
+                {
+                    "date": 1761322426329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,19 @@\n .table-container {\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n   flex: 1;\r\n-  overflow: auto;\r\n+  overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 75px;\r\n+  padding-bottom: 70px; /* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 100px);\r\n+  height: auto; /* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761322449889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,9 @@\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n-  width: 100%;\r\n-  height: auto; /* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n+  width: 100%;/* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761322463416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,10 @@\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n-  width: 100%;/* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n+  width: 100%;\r\n+  height: 100vh;/* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761322502156,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,23 @@\n .table-container {\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n   flex: 1;\r\n-  overflow-y: auto;     /* scroll po vertikali */\r\n+  overflow-y: auto;      /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 70px; /* prostor za bottom nav */\r\n+  height: calc(100vh - 60px); /* 60px je visina bottom navigacije */\r\n+  padding-bottom: 60px;  /* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: 100vh;/* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n+  height: 100%; /* zauzima cijelu visinu .table-container */\r\n }\r\n \r\n+\r\n table thead th {\r\n   font-size: 1rem;\r\n   padding: 0.6rem;\r\n   font-weight: 500;\r\n"
+                },
+                {
+                    "date": 1761322511841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,9 @@\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;      /* scroll po vertikali */\r\n-  width: 100%;\r\n-  height: calc(100vh - 60px); /* 60px je visina bottom navigacije */\r\n+  width: 100%;/* 60px je visina bottom navigacije */\r\n   padding-bottom: 60px;  /* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1761322518079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,9 @@\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n-  width: 100%;\r\n-  height: 100%; /* zauzima cijelu visinu .table-container */\r\n+  width: 100%; /* zauzima cijelu visinu .table-container */\r\n }\r\n \r\n \r\n table thead th {\r\n"
+                },
+                {
+                    "date": 1761322529414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,21 @@\n .table-container {\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n   flex: 1;\r\n-  overflow-y: auto;      /* scroll po vertikali */\r\n-  width: 100%;/* 60px je visina bottom navigacije */\r\n-  padding-bottom: 60px;  /* prostor za bottom nav */\r\n+  overflow-y: auto;     /* scroll po vertikali */\r\n+  width: 100%;\r\n+  padding-bottom: 70px; /* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n-  width: 100%; /* zauzima cijelu visinu .table-container */\r\n+  width: 100%;\r\n+  height: 100vh;/* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n }\r\n \r\n-\r\n table thead th {\r\n   font-size: 1rem;\r\n   padding: 0.6rem;\r\n   font-weight: 500;\r\n"
+                },
+                {
+                    "date": 1761322602384,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 70px; /* prostor za bottom nav */\r\n+  padding-bottom: 0px; /* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761322632478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: 100vh;/* ukloni calc(100vh...) da se tablica širi po visini sadržaja */\r\n+  height: calc(100vh - 100px); \r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761322739889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 0px; /* prostor za bottom nav */\r\n+  padding-bottom: 200px; /* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761322746794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 200px; /* prostor za bottom nav */\r\n+  padding-bottom: 0px; /* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761324405042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,8 +57,9 @@\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n+  \r\n }\r\n \r\n table th:first-child {\r\n   left: 0;\r\n"
+                },
+                {
+                    "date": 1761324417419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,14 +52,15 @@\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n+  width: 70px;\r\n   transition: background-color 0.2s;\r\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n-  \r\n+\r\n }\r\n \r\n table th:first-child {\r\n   left: 0;\r\n"
+                },
+                {
+                    "date": 1761324433677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n-  width: 70px;\r\n+  width:1rem;\r\n   transition: background-color 0.2s;\r\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n"
+                },
+                {
+                    "date": 1761324441447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n-  width:1rem;\r\n+  width:0.5rem;\r\n   transition: background-color 0.2s;\r\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n"
+                },
+                {
+                    "date": 1761324464535,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n-  width:0.5rem;\r\n+  width:1%;\r\n   transition: background-color 0.2s;\r\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n"
+                },
+                {
+                    "date": 1761324616587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,8 +61,15 @@\n   color: #f0f0f0;\r\n \r\n }\r\n \r\n+td.out-of-hours {\r\n+  background-color: #555;  /* siva pozadina za pauze ili izvan radnog vremena */\r\n+  color: #aaa;             /* svijetliji tekst */\r\n+  cursor: not-allowed;     /* pokazivač miša */\r\n+}\r\n+\r\n+\r\n table th:first-child {\r\n   left: 0;\r\n   z-index: 30;\r\n }\r\n"
+                },
+                {
+                    "date": 1761324992740,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,8 +67,12 @@\n   color: #aaa;             /* svijetliji tekst */\r\n   cursor: not-allowed;     /* pokazivač miša */\r\n }\r\n \r\n+td.break {\r\n+  background-color: #888;  /* siva boja za pauzu */\r\n+  cursor: pointer;\r\n+}\r\n \r\n table th:first-child {\r\n   left: 0;\r\n   z-index: 30;\r\n"
+                },
+                {
+                    "date": 1761325400207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n   cursor: not-allowed;     /* pokazivač miša */\r\n }\r\n \r\n td.break {\r\n-  background-color: #888;  /* siva boja za pauzu */\r\n+  background-color: #555 siva boja za pauzu */\r\n   cursor: pointer;\r\n }\r\n \r\n table th:first-child {\r\n"
+                },
+                {
+                    "date": 1761325441271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,13 +64,13 @@\n \r\n td.out-of-hours {\r\n   background-color: #555;  /* siva pozadina za pauze ili izvan radnog vremena */\r\n   color: #aaa;             /* svijetliji tekst */\r\n-  cursor: not-allowed;     /* pokazivač miša */\r\n+  cursor: not-allowed;   \r\n }\r\n \r\n td.break {\r\n-  background-color: #555 siva boja za pauzu */\r\n+  background-color: #555 siva boja za pauzu \r\n   cursor: pointer;\r\n }\r\n \r\n table th:first-child {\r\n"
+                },
+                {
+                    "date": 1761325956646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 0px; /* prostor za bottom nav */\r\n+  padding-bottom: 50px;* prostor za bottom nav */\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n@@ -68,9 +68,9 @@\n   cursor: not-allowed;   \r\n }\r\n \r\n td.break {\r\n-  background-color: #555 siva boja za pauzu \r\n+  background-color: #555;\r\n   cursor: pointer;\r\n }\r\n \r\n table th:first-child {\r\n"
+                },
+                {
+                    "date": 1761325962574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 50px;* prostor za bottom nav */\r\n+  padding-bottom: 50px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761325974871,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 50px;\r\n+  padding-bottom:70px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761326089421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,8 @@\n \r\n }\r\n \r\n td.out-of-hours {\r\n-  background-color: #555;  /* siva pozadina za pauze ili izvan radnog vremena */\r\n   color: #aaa;             /* svijetliji tekst */\r\n   cursor: not-allowed;   \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1761326106481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,8 +62,9 @@\n \r\n }\r\n \r\n td.out-of-hours {\r\n+  background-color: #333;\r\n   color: #aaa;             /* svijetliji tekst */\r\n   cursor: not-allowed;   \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1761326112388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n   cursor: not-allowed;   \r\n }\r\n \r\n td.break {\r\n-  background-color: #555;\r\n+  background-color: #333;\r\n   cursor: pointer;\r\n }\r\n \r\n table th:first-child {\r\n"
+                },
+                {
+                    "date": 1761326151328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .table-container {\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n   flex: 1;\r\n-  overflow-y: auto;     /* scroll po vertikali */\r\n+  overflow-x:auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:70px;\r\n   box-sizing: border-box;\r\n }\r\n"
+                },
+                {
+                    "date": 1761326249558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 100px); \r\n+  height: calc(100vh - 150px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326259529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 150px);\r\n+  height: calc(100vh - 200px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326269572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 200px);\r\n+  height: 10vh;\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326285271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: 10vh;\r\n+  height: 100vh;\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326290487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,8 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: 100vh;\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326301798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n   flex: 1;\r\n   overflow-x:auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:70px;\r\n+  height: 100vh;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761326307150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   flex: 1;\r\n   overflow-x:auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:70px;\r\n-  height: 100vh;\r\n+  height: 50px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761326325237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,16 +4,16 @@\n   flex: 1;\r\n   overflow-x:auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:70px;\r\n-  height: 50px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n+\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326353320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,27 +1,21 @@\n .table-container {\r\n-  transition: transform 0.3s ease;\r\n-  transform-origin: top left;\r\n   flex: 1;\r\n-  overflow-x:auto;     /* scroll po vertikali */\r\n+  overflow: auto;\r\n   width: 100%;\r\n-  padding-bottom:70px;\r\n+  padding-bottom: 0;\r\n   box-sizing: border-box;\r\n+  transition: transform 0.3s ease;\r\n+  transform-origin: top left;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-\r\n+  height: calc(100vh - 100px); /* prilagodi ako ima header + tjedan + bottom nav */\r\n }\r\n \r\n-table thead th {\r\n-  font-size: 1rem;\r\n-  padding: 0.6rem;\r\n-  font-weight: 500;\r\n-}\r\n-\r\n th, td {\r\n   border: 1px solid #444;\r\n   text-align: center;\r\n   white-space: normal;\r\n@@ -31,9 +25,10 @@\n   width: 60px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n-th {\r\n+/* Header intervala */\r\n+table thead th {\r\n   background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);\r\n   color: #fff;\r\n   position: sticky;\r\n   top: 0;\r\n@@ -42,8 +37,9 @@\n   transition: background-color 0.2s;\r\n   border-bottom: 1px solid #444;\r\n }\r\n \r\n+/* Sticky prvi stupac (dani) */\r\n .day-cell {\r\n   position: sticky;\r\n   left: 0;\r\n   background: linear-gradient(to right, #2a2a2a, #1f1f1f);\r\n@@ -52,34 +48,22 @@\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n-  width:1%;\r\n   transition: background-color 0.2s;\r\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n-\r\n }\r\n \r\n-td.out-of-hours {\r\n-  background-color: #333;\r\n-  color: #aaa;             /* svijetliji tekst */\r\n-  cursor: not-allowed;   \r\n-}\r\n-\r\n-td.break {\r\n-  background-color: #333;\r\n-  cursor: pointer;\r\n-}\r\n-\r\n+/* Gornji lijevi kut */\r\n table th:first-child {\r\n   left: 0;\r\n   z-index: 30;\r\n }\r\n \r\n-/* booked cells */\r\n+/* Booked cells */\r\n td.booked {\r\n   background: linear-gradient(135deg, #4f8ef7, #1d3fa3);\r\n   color: #fff;\r\n   font-weight: 600;\r\n@@ -93,63 +77,54 @@\n   white-space: nowrap;\r\n   overflow: hidden;\r\n   box-shadow: 0 4px 12px rgba(0,0,0,0.25);\r\n }\r\n-\r\n td.booked:hover {\r\n   background: linear-gradient(135deg, #2563eb, #1e3a8a);\r\n   transform: translateY(-2px);\r\n   box-shadow: 0 6px 18px rgba(0,0,0,0.35);\r\n   cursor: pointer;\r\n }\r\n-\r\n-td.booked span {\r\n-  display: block;\r\n-  font-size: 0.4rem;\r\n-  text-overflow: ellipsis;\r\n-  overflow: hidden;\r\n+td.booked.cancelled {\r\n+  background-color: #f8d7da !important;\r\n+  color: #721c24 !important;\r\n+  text-decoration: line-through;\r\n+  box-shadow: none;\r\n+  cursor: not-allowed;\r\n }\r\n \r\n-td:not(.booked):hover {\r\n+td.empty-cell {\r\n+  text-align: center;\r\n+  color: #aaa;\r\n+  font-style: italic;\r\n+  font-size: 0.9rem;\r\n+  padding: 8px;\r\n   background-color: #333;\r\n-  cursor: pointer;\r\n+  border: 1px solid #444;\r\n+  max-width: 50px;\r\n+  white-space: normal;\r\n+  overflow: hidden;\r\n }\r\n \r\n-.day-cell:hover {\r\n-  background-color: #444;\r\n-  cursor: default;\r\n-}\r\n-\r\n-.table-container th:hover {\r\n-  background-color: #3b3b3b;\r\n-  cursor: default;\r\n-}\r\n-\r\n-/* zebra i vikend boje */\r\n+/* Zebra pattern za dane */\r\n tbody tr:nth-child(odd) td.day-cell { background-color: #2f2f2f; }\r\n tbody tr:nth-child(even) td.day-cell { background-color: #2a2a2a; }\r\n+\r\n+/* Vikend boja */\r\n tbody tr td.day-cell:nth-child(6),\r\n-tbody tr td.day-cell:nth-child(7) { background-color: #222; color: #ff9a9a; }\r\n+tbody tr td.day-cell:nth-child(7) {\r\n+  background-color: #222;\r\n+  color: #ff9a9a;\r\n+}\r\n \r\n+/* Responsive mobitel */\r\n @media (max-width: 768px) {\r\n   table { font-size: 0.6rem; min-width: 750px; }\r\n   th, td { padding: 3px; font-size: 1rem; }\r\n   .day-cell { min-width: 50px; max-width: 70px; padding-right: 1rem; }\r\n   table thead th { padding: 0.45rem; font-weight: 500; }\r\n }\r\n \r\n+/* Veća visina tablice za desktop */\r\n @media (min-width: 769px) {\r\n-  table { height: calc(100vh - 140px); }\r\n+  table { height: calc(100vh - 153px); } /* nav + tjedan + zoom + bottom nav */\r\n }\r\n-\r\n-/* Stil za prazne ćelije (nema radnog vremena) */\r\n-td.empty-cell {\r\n-  text-align: left; /* lijevo poravnanje */\r\n-  padding-left: 1rem; /* udaljenost od početka ćelije */\r\n-  color: #aaa;\r\n-  font-style: italic;\r\n-  font-size: 0.9rem;\r\n-  background-color: #333;\r\n-  border: 1px solid #444;\r\n-  white-space: normal;\r\n-  overflow: hidden;\r\n-}\r\n"
+                },
+                {
+                    "date": 1761326386958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,27 @@\n .table-container {\r\n+  transition: transform 0.3s ease;\r\n+  transform-origin: top left;\r\n   flex: 1;\r\n-  overflow: auto;\r\n+  overflow-x:auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom: 0;\r\n+  padding-bottom:70px;\r\n   box-sizing: border-box;\r\n-  transition: transform 0.3s ease;\r\n-  transform-origin: top left;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 100px); /* prilagodi ako ima header + tjedan + bottom nav */\r\n+  height: 10vh:\r\n }\r\n \r\n+table thead th {\r\n+  font-size: 1rem;\r\n+  padding: 0.6rem;\r\n+  font-weight: 500;\r\n+}\r\n+\r\n th, td {\r\n   border: 1px solid #444;\r\n   text-align: center;\r\n   white-space: normal;\r\n@@ -25,10 +31,9 @@\n   width: 60px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n-/* Header intervala */\r\n-table thead th {\r\n+th {\r\n   background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);\r\n   color: #fff;\r\n   position: sticky;\r\n   top: 0;\r\n@@ -37,9 +42,8 @@\n   transition: background-color 0.2s;\r\n   border-bottom: 1px solid #444;\r\n }\r\n \r\n-/* Sticky prvi stupac (dani) */\r\n .day-cell {\r\n   position: sticky;\r\n   left: 0;\r\n   background: linear-gradient(to right, #2a2a2a, #1f1f1f);\r\n@@ -48,22 +52,34 @@\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n   max-width: 75px;\r\n+  width:1%;\r\n   transition: background-color 0.2s;\r\n   border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n+\r\n }\r\n \r\n-/* Gornji lijevi kut */\r\n+td.out-of-hours {\r\n+  background-color: #333;\r\n+  color: #aaa;             /* svijetliji tekst */\r\n+  cursor: not-allowed;   \r\n+}\r\n+\r\n+td.break {\r\n+  background-color: #333;\r\n+  cursor: pointer;\r\n+}\r\n+\r\n table th:first-child {\r\n   left: 0;\r\n   z-index: 30;\r\n }\r\n \r\n-/* Booked cells */\r\n+/* booked cells */\r\n td.booked {\r\n   background: linear-gradient(135deg, #4f8ef7, #1d3fa3);\r\n   color: #fff;\r\n   font-weight: 600;\r\n@@ -77,54 +93,63 @@\n   white-space: nowrap;\r\n   overflow: hidden;\r\n   box-shadow: 0 4px 12px rgba(0,0,0,0.25);\r\n }\r\n+\r\n td.booked:hover {\r\n   background: linear-gradient(135deg, #2563eb, #1e3a8a);\r\n   transform: translateY(-2px);\r\n   box-shadow: 0 6px 18px rgba(0,0,0,0.35);\r\n   cursor: pointer;\r\n }\r\n-td.booked.cancelled {\r\n-  background-color: #f8d7da !important;\r\n-  color: #721c24 !important;\r\n-  text-decoration: line-through;\r\n-  box-shadow: none;\r\n-  cursor: not-allowed;\r\n+\r\n+td.booked span {\r\n+  display: block;\r\n+  font-size: 0.4rem;\r\n+  text-overflow: ellipsis;\r\n+  overflow: hidden;\r\n }\r\n \r\n-td.empty-cell {\r\n-  text-align: center;\r\n-  color: #aaa;\r\n-  font-style: italic;\r\n-  font-size: 0.9rem;\r\n-  padding: 8px;\r\n+td:not(.booked):hover {\r\n   background-color: #333;\r\n-  border: 1px solid #444;\r\n-  max-width: 50px;\r\n-  white-space: normal;\r\n-  overflow: hidden;\r\n+  cursor: pointer;\r\n }\r\n \r\n-/* Zebra pattern za dane */\r\n+.day-cell:hover {\r\n+  background-color: #444;\r\n+  cursor: default;\r\n+}\r\n+\r\n+.table-container th:hover {\r\n+  background-color: #3b3b3b;\r\n+  cursor: default;\r\n+}\r\n+\r\n+/* zebra i vikend boje */\r\n tbody tr:nth-child(odd) td.day-cell { background-color: #2f2f2f; }\r\n tbody tr:nth-child(even) td.day-cell { background-color: #2a2a2a; }\r\n-\r\n-/* Vikend boja */\r\n tbody tr td.day-cell:nth-child(6),\r\n-tbody tr td.day-cell:nth-child(7) {\r\n-  background-color: #222;\r\n-  color: #ff9a9a;\r\n-}\r\n+tbody tr td.day-cell:nth-child(7) { background-color: #222; color: #ff9a9a; }\r\n \r\n-/* Responsive mobitel */\r\n @media (max-width: 768px) {\r\n   table { font-size: 0.6rem; min-width: 750px; }\r\n   th, td { padding: 3px; font-size: 1rem; }\r\n   .day-cell { min-width: 50px; max-width: 70px; padding-right: 1rem; }\r\n   table thead th { padding: 0.45rem; font-weight: 500; }\r\n }\r\n \r\n-/* Veća visina tablice za desktop */\r\n @media (min-width: 769px) {\r\n-  table { height: calc(100vh - 153px); } /* nav + tjedan + zoom + bottom nav */\r\n+  table { height: calc(100vh - 140px); }\r\n }\r\n+\r\n+/* Stil za prazne ćelije (nema radnog vremena) */\r\n+td.empty-cell {\r\n+  text-align: left; /* lijevo poravnanje */\r\n+  padding-left: 1rem; /* udaljenost od početka ćelije */\r\n+  color: #aaa;\r\n+  font-style: italic;\r\n+  font-size: 0.9rem;\r\n+  background-color: #333;\r\n+  border: 1px solid #444;\r\n+  white-space: normal;\r\n+  overflow: hidden;\r\n+}\r\n"
+                },
+                {
+                    "date": 1761326402741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: 10vh:\r\n+  height: calc(100vh - 150px)\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326416065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .table-container {\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n   flex: 1;\r\n-  overflow-x:auto;     /* scroll po vertikali */\r\n+  overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:70px;\r\n   box-sizing: border-box;\r\n }\r\n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 150px)\r\n+  height: calc(100vh - 100px); \r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n@@ -68,9 +68,9 @@\n   cursor: not-allowed;   \r\n }\r\n \r\n td.break {\r\n-  background-color: #333;\r\n+  background-color: #555;\r\n   cursor: pointer;\r\n }\r\n \r\n table th:first-child {\r\n"
+                },
+                {
+                    "date": 1761326430508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n \r\n }\r\n \r\n td.out-of-hours {\r\n-  background-color: #333;\r\n+  background-color: #555;  /* siva pozadina za pauze ili izvan radnog vremena */\r\n   color: #aaa;             /* svijetliji tekst */\r\n   cursor: not-allowed;   \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1761326596380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom:70px;\r\n+  padding-bottom:50x;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761326601816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   transform-origin: top left;\r\n   flex: 1;\r\n   overflow-y: auto;     /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom:50x;\r\n+  padding-bottom:0px;\r\n   box-sizing: border-box;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761326669857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 100px); \r\n+  height: calc(100vh - 150px); \r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326675028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 150px); \r\n+  height: calc(100vh - 100px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761326690556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n .table-container {\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n-  flex: 1;\r\n-  overflow-y: auto;     /* scroll po vertikali */\r\n+  flex: 1;     /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:0px;\r\n   box-sizing: border-box;\r\n }\r\n"
+                },
+                {
+                    "date": 1761326702513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n .table-container {\r\n   transition: transform 0.3s ease;\r\n   transform-origin: top left;\r\n-  flex: 1;     /* scroll po vertikali */\r\n+  flex: 1;\r\n+  overflow-x: auto; /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:0px;\r\n   box-sizing: border-box;\r\n }\r\n"
+                },
+                {
+                    "date": 1761326990626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,11 +62,10 @@\n \r\n }\r\n \r\n td.out-of-hours {\r\n-  background-color: #555;  /* siva pozadina za pauze ili izvan radnog vremena */\r\n-  color: #aaa;             /* svijetliji tekst */\r\n-  cursor: not-allowed;   \r\n+  background-color: #333;\r\n+  border: 1px solid #444;\r\n }\r\n \r\n td.break {\r\n   background-color: #555;\r\n"
+                },
+                {
+                    "date": 1761326998043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,8 +64,9 @@\n \r\n td.out-of-hours {\r\n   background-color: #333;\r\n   border: 1px solid #444;\r\n+  cursor:not-allowed;\r\n }\r\n \r\n td.break {\r\n   background-color: #555;\r\n"
+                },
+                {
+                    "date": 1761327003942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,10 @@\n   cursor:not-allowed;\r\n }\r\n \r\n td.break {\r\n-  background-color: #555;\r\n+    background-color: #333;\r\n+  border: 1px solid #444;\r\n   cursor: pointer;\r\n }\r\n \r\n table th:first-child {\r\n"
+                },
+                {
+                    "date": 1761327011228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n \r\n td.break {\r\n     background-color: #333;\r\n   border: 1px solid #444;\r\n-  cursor: pointer;\r\n+  cursor: not-allowed;\r\n }\r\n \r\n table th:first-child {\r\n   left: 0;\r\n"
+                },
+                {
+                    "date": 1761327103519,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,8 @@\n \r\n td.break {\r\n     background-color: #333;\r\n   border: 1px solid #444;\r\n-  cursor: not-allowed;\r\n }\r\n \r\n table th:first-child {\r\n   left: 0;\r\n"
+                },
+                {
+                    "date": 1761327190854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n .table-container {\r\n-  transition: transform 0.3s ease;\r\n-  transform-origin: top left;\r\n+    overflow-x: auto;   /* horizontalni scroll */\r\n+  overflow-y: auto;   /* vertikalni scroll */\r\n+  -webkit-overflow-scrolling: touch; /* glatki scroll na iOS-u */\r\n+  box-sizing: border-box;\r\n   flex: 1;\r\n   overflow-x: auto; /* scroll po vertikali */\r\n   width: 100%;\r\n   padding-bottom:0px;\r\n@@ -64,9 +66,8 @@\n \r\n td.out-of-hours {\r\n   background-color: #333;\r\n   border: 1px solid #444;\r\n-  cursor:not-allowed;\r\n }\r\n \r\n td.break {\r\n     background-color: #333;\r\n"
+                },
+                {
+                    "date": 1761327196608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,8 @@\n   box-sizing: border-box;\r\n   flex: 1;\r\n   overflow-x: auto; /* scroll po vertikali */\r\n   width: 100%;\r\n-  padding-bottom:0px;\r\n-  box-sizing: border-box;\r\n }\r\n \r\n table {\r\n   border-collapse: collapse;\r\n"
+                },
+                {
+                    "date": 1761327275534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n   overflow-y: auto;   /* vertikalni scroll */\r\n   -webkit-overflow-scrolling: touch; /* glatki scroll na iOS-u */\r\n   box-sizing: border-box;\r\n   flex: 1;\r\n-  overflow-x: auto; /* scroll po vertikali */\r\n+  overflow-x: auto;\r\n+  overflow-y: auto;\r\n   width: 100%;\r\n }\r\n \r\n table {\r\n"
+                },
+                {
+                    "date": 1761327754523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .table-container {\r\n     overflow-x: auto;   /* horizontalni scroll */\r\n   overflow-y: auto;   /* vertikalni scroll */\r\n-  -webkit-overflow-scrolling: touch; /* glatki scroll na iOS-u */\r\n+  -webkit-overflow-scrolling: touch;\r\n   box-sizing: border-box;\r\n   flex: 1;\r\n   overflow-x: auto;\r\n   overflow-y: auto;\r\n"
+                },
+                {
+                    "date": 1761327913941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n     overflow-x: auto;   /* horizontalni scroll */\r\n   overflow-y: auto;   /* vertikalni scroll */\r\n   -webkit-overflow-scrolling: touch;\r\n   box-sizing: border-box;\r\n-  flex: 1;\r\n   overflow-x: auto;\r\n   overflow-y: auto;\r\n   width: 100%;\r\n }\r\n"
+                },
+                {
+                    "date": 1761328051642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n .day-cell {\r\n   position: sticky;\r\n   left: 0;\r\n   background: linear-gradient(to right, #2a2a2a, #1f1f1f);\r\n-  opacity: 95%;\r\n+  background: rgba(42, 42, 42, 0.95);\r\n   z-index: 10;\r\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n"
+                },
+                {
+                    "date": 1761328079329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n .day-cell {\r\n   position: sticky;\r\n   left: 0;\r\n   background: linear-gradient(to right, #2a2a2a, #1f1f1f);\r\n-  background: rgba(42, 42, 42, 0.95);\r\n+  opacity: 95%;\r\n   z-index: 10;\r\n   font-weight: 540;\r\n   font-size: 1rem;\r\n   min-width: 65px;\r\n"
+                },
+                {
+                    "date": 1761328109172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n   min-width: 65px;\r\n   max-width: 75px;\r\n   width:1%;\r\n   transition: background-color 0.2s;\r\n-  border-right: 1px solid #444;\r\n+   border-right: 1px solid transparent;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n \r\n"
+                },
+                {
+                    "date": 1761328120794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n   min-width: 65px;\r\n   max-width: 75px;\r\n   width:1%;\r\n   transition: background-color 0.2s;\r\n-   border-right: 1px solid transparent;\r\n+  border-right: 1px solid #444;\r\n   text-align: left;\r\n   padding-left: 1rem;\r\n   color: #f0f0f0;\r\n \r\n"
+                },
+                {
+                    "date": 1761328159921,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: calc(100vh - 100px);\r\n+  height: auto;\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328196678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -136,9 +136,9 @@\n   table thead th { padding: 0.45rem; font-weight: 500; }\r\n }\r\n \r\n @media (min-width: 769px) {\r\n-  table { height: calc(100vh - 140px); }\r\n+  table {}\r\n }\r\n \r\n /* Stil za prazne ćelije (nema radnog vremena) */\r\n td.empty-cell {\r\n"
+                },
+                {
+                    "date": 1761328202025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -136,9 +136,9 @@\n   table thead th { padding: 0.45rem; font-weight: 500; }\r\n }\r\n \r\n @media (min-width: 769px) {\r\n-  table {}\r\n+  table { height: calc(100vh - 140px); }\r\n }\r\n \r\n /* Stil za prazne ćelije (nema radnog vremena) */\r\n td.empty-cell {\r\n"
+                },
+                {
+                    "date": 1761328212521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height: auto;\r\n+  height:90%\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328260305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:90%\r\n+  height:calc(100vh - 50px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328277245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 50px);\r\n+  height:calc(100vh - 140px;\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328295436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 140px;\r\n+  height:calc(100vh - 135px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328322167,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 135px);\r\n+  height:calc(100vh - 130px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328331868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 130px);\r\n+  height:calc(100vh - 120px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328339026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 120px);\r\n+  height:calc(100vh - 125px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328353441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 125px);\r\n+  height:calc(100vh - 130px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328362189,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 130px);\r\n+  height:calc(100vh - 116\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328373794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 116\r\n+  height:calc(100vh - 120px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328384552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 120px);\r\n+  height:calc(100vh - 118px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328393091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 118px);\r\n+  height:calc(100vh - 112px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328400107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 112px);\r\n+  height:calc(100vh - 115px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328585440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 115px);\r\n+  height:calc(100vh - 112px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328592144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 112px);\r\n+  height:calc(100vh - 113px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328597833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 113px);\r\n+  height:calc(100vh - 11.5px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328609815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 11.5px);\r\n+  height:calc(100vh - 111.5px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328622772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 111.5px);\r\n+  height:calc(100vh - 110px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328630880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 110px);\r\n+  height:calc(100vh - 109px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328638406,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 109px);\r\n+  height:calc(100vh - 107px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761328645840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 107px);\r\n+  height:calc(100vh - 106px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n"
+                },
+                {
+                    "date": 1761330039785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n table {\r\n   border-collapse: collapse;\r\n   min-width: 900px;\r\n   width: 100%;\r\n-  height:calc(100vh - 106px);\r\n+  height:calc(100vh - 105px);\r\n }\r\n \r\n table thead th {\r\n   font-size: 1rem;\r\n@@ -62,11 +62,15 @@\n \r\n }\r\n \r\n td.out-of-hours {\r\n-  background-color: #333;\r\n-  border: 1px solid #444;\r\n+ td.out-of-hours {\r\n+  background-color: #1f1f1f;\r\n+  border: 1px solid #222;\r\n+  opacity: 0.6;\r\n+  pointer-events: none; /* korisnik ne može kliknuti */\r\n }\r\n+}\r\n \r\n td.break {\r\n     background-color: #333;\r\n   border: 1px solid #444;\r\n"
+                },
+                {
+                    "date": 1761330045645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,16 +61,14 @@\n   color: #f0f0f0;\r\n \r\n }\r\n \r\n-td.out-of-hours {\r\n  td.out-of-hours {\r\n   background-color: #1f1f1f;\r\n   border: 1px solid #222;\r\n   opacity: 0.6;\r\n   pointer-events: none; /* korisnik ne može kliknuti */\r\n }\r\n-}\r\n \r\n td.break {\r\n     background-color: #333;\r\n   border: 1px solid #444;\r\n"
+                },
+                {
+                    "date": 1761330109433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n   pointer-events: none; /* korisnik ne može kliknuti */\r\n }\r\n \r\n td.break {\r\n-    background-color: #333;\r\n+   background-color: #333;\r\n   border: 1px solid #444;\r\n }\r\n \r\n table th:first-child {\r\n"
+                },
+                {
+                    "date": 1761330152792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,17 +61,15 @@\n   color: #f0f0f0;\r\n \r\n }\r\n \r\n- td.out-of-hours {\r\n-  background-color: #1f1f1f;\r\n-  border: 1px solid #222;\r\n-  opacity: 0.6;\r\n-  pointer-events: none; /* korisnik ne može kliknuti */\r\n+td.out-of-hours {\r\n+  background-color: #333;\r\n+  border: 1px solid #444;\r\n }\r\n \r\n td.break {\r\n-   background-color: #333;\r\n+    background-color: #333;\r\n   border: 1px solid #444;\r\n }\r\n \r\n table th:first-child {\r\n"
+                }
+            ],
+            "date": 1761141370677,
+            "name": "Commit-0",
+            "content": "/* === Table container === */\r\n.table-container {\r\n  flex: 1;\r\n  overflow: auto;\r\n  width: 100%;\r\n  padding-bottom: 0px;\r\n  box-sizing: border-box;\r\n  transition: transform 0.3s ease;\r\n  transform-origin: top left;\r\n}\r\n\r\n/* === Table styling === */\r\ntable {\r\n  border-collapse: collapse;\r\n  width: 100%;\r\n  min-width: 900px;\r\n}\r\n\r\nthead th {\r\n  font-size: 1rem;\r\n  padding: 0.6rem;\r\n  font-weight: 500;\r\n  text-align: center;\r\n  background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);\r\n  color: #fff;\r\n  position: sticky;\r\n  top: 0;\r\n  z-index: 20;\r\n  border-bottom: 1px solid #444;\r\n}\r\n\r\nth.hour-cell {\r\n  width: 60px;\r\n}\r\n\r\ntd, th {\r\n  border: 1px solid #444;\r\n  text-align: center;\r\n  white-space: normal;\r\n  padding: 3px;\r\n  font-size: 0.65rem;\r\n  line-height: 1em;\r\n  box-sizing: border-box;\r\n}\r\n\r\n/* === Sticky first column (day names) === */\r\n.day-cell {\r\n  position: sticky;\r\n  left: 0;\r\n  background: linear-gradient(to right, #2a2a2a, #1f1f1f);\r\n  opacity: 0.95;\r\n  z-index: 10;\r\n  font-weight: 540;\r\n  font-size: 1rem;\r\n  min-width: 65px;\r\n  max-width: 75px;\r\n  padding-left: 1rem;\r\n  text-align: left;\r\n  color: #f0f0f0;\r\n  border-right: 1px solid #444;\r\n}\r\n\r\ntable th:first-child {\r\n  left: 0;\r\n  z-index: 30; /* uvijek iznad headera i prvog stupca */\r\n}\r\n\r\n/* === Booked cells === */\r\ntd.booked {\r\n  background: linear-gradient(135deg, #4f8ef7, #1d3fa3);\r\n  color: #fff;\r\n  font-weight: 600;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n  font-size: 0.8rem;\r\n  line-height: 1em;\r\n  padding: 4px 6px;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\r\n  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;\r\n}\r\n\r\ntd.booked:hover {\r\n  background: linear-gradient(135deg, #2563eb, #1e3a8a);\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);\r\n  cursor: pointer;\r\n}\r\n\r\ntd.booked.cancelled {\r\n  background-color: #f8d7da !important;\r\n  color: #721c24 !important;\r\n  text-decoration: line-through;\r\n  box-shadow: none;\r\n  cursor: not-allowed;\r\n}\r\n\r\n/* === Free cells === */\r\ntd:not(.booked):hover {\r\n  background-color: #333;\r\n  cursor: pointer;\r\n}\r\n\r\n/* === Empty cell (no schedule) === */\r\ntd.empty-cell {\r\n  text-align: center;\r\n  color: #aaa;\r\n  font-style: italic;\r\n  font-size: 0.9rem;\r\n  padding: 8px;\r\n  background-color: #333;\r\n  border: 1px;\r\n  max-width: 50px;\r\n  white-space: normal;\r\n  overflow: hidden;\r\n}\r\n\r\n/* === Zebra pattern for day column === */\r\ntbody tr:nth-child(odd) td.day-cell {\r\n  background-color: #2f2f2f;\r\n}\r\ntbody tr:nth-child(even) td.day-cell {\r\n  background-color: #2a2a2a;\r\n}\r\n\r\n/* Weekend highlight */\r\ntbody tr td.day-cell:nth-child(6),\r\ntbody tr td.day-cell:nth-child(7) {\r\n  background-color: #222;\r\n  color: #ff9a9a;\r\n}\r\n\r\n/* === Responsive for mobile === */\r\n@media (max-width: 768px) {\r\n  table {\r\n    font-size: 0.6rem;\r\n    min-width: 350px;\r\n  }\r\n  th, td {\r\n    padding: 3px;\r\n    font-size: 0.8rem;\r\n  }\r\n  .day-cell {\r\n    min-width: 50px;\r\n    max-width: 70px;\r\n    padding-left: 0.8rem;\r\n  }\r\n}\r\n"
+        }
+    ]
+}

@@ -1,0 +1,185 @@
+/* Body i main layout */
+body {
+  background-color: #181818;
+  color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Navigacija tjedna */
+.week-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+  gap: 1rem;
+  color: #f0f0f0;
+}
+.week-nav button {
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.week-nav button:hover {
+  background-color: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+.week-nav span {
+  font-weight: bold;
+  font-size: 0.9rem;
+  background-color: #2a2a2a;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+/* Zoom kontrole */
+.zoom-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+.zoom-controls button {
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.zoom-controls button:hover {
+  background-color: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+.zoom-controls span {
+  font-weight: bold;
+  font-size: 0.9rem;
+  background-color: #2a2a2a;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+/* Bottom nav fix */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #111;
+  border-top: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #fff;
+  z-index: 5;
+}
+
+/* Modal pozadina i sadržaj */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: #ffffff;
+  color: #1f1f1f;
+  padding: 30px 35px;
+  border-radius: 14px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  animation: slideUp 0.25s ease-out;
+  line-height: 1.5;
+}
+@keyframes slideUp {
+  from { transform: translateY(25px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-content h3 { margin-top: 0; margin-bottom: 12px; font-size: 1.4rem; font-weight: 700; color: #111111; }
+.modal-content p { margin: 6px 0; font-size: 1.05rem; color: #222222; word-break: break-word; }
+
+/* Notifikacije */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(150%);
+  animation: slideIn 0.3s forwards, fadeOut 0.3s 3.5s forwards;
+  font-size: 1.1rem;
+  font-family: Arial, sans-serif;
+}
+.notification.success { background-color: #16a34a; }
+.notification.error { background-color: #dc2626; }
+@keyframes slideIn { from { transform: translateX(150%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* Rezervacijski form unutar modala */
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #1f1f1f;
+}
+.reservation-form h3 { margin: 0; font-size: 1.3rem; font-weight: 700; text-align: center; }
+.reservation-form .form-group { display: flex; flex-direction: column; gap: 5px; }
+.reservation-form label { font-weight: 600; font-size: 0.95rem; }
+.reservation-form select, .reservation-form input[type="text"] { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+.reservation-form input[disabled] { background-color: #f0f0f0; color: #555; }
+.reservation-form .form-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.reservation-form button { flex: 1; padding: 10px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+.reservation-form button:first-child { background-color: #3b82f6; color: #fff; }
+.reservation-form button:first-child:hover { background-color: #2563eb; transform: translateY(-1px); }
+.reservation-form button:last-child { background-color: #f0f0f0; color: #1f1f1f; }
+.reservation-form button:last-child:hover { background-color: #dcdcdc; }

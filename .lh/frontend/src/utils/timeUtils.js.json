@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/src/utils/timeUtils.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1761142552025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761142803068,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,4 +35,24 @@\n   }\r\n \r\n   return result;\r\n };\r\n+\r\n+export const canBookInterval = (weekSchedule, dayTimes, dayShort, startTime, duration) => {\r\n+  const dayTerms = weekSchedule[dayShort] || [];\r\n+  const dayStartMin = timeToMinutes(dayTimes[dayShort]?.start || \"00:00\");\r\n+  const dayEndMin = timeToMinutes(dayTimes[dayShort]?.end || \"23:59\");\r\n+\r\n+  const startMin = timeToMinutes(startTime);\r\n+  const endMin = startMin + duration;\r\n+\r\n+  if (startMin < dayStartMin || endMin > dayEndMin) return false;\r\n+\r\n+  for (let term of dayTerms) {\r\n+    if (term.status === \"otkazan\") continue;\r\n+    const termStart = timeToMinutes(term.od);\r\n+    const termEnd = timeToMinutes(term.do);\r\n+    if (Math.max(startMin, termStart) < Math.min(endMin, termEnd)) return false;\r\n+  }\r\n+\r\n+  return true;\r\n+};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1761327506797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,22 +37,34 @@\n   return result;\r\n };\r\n \r\n export const canBookInterval = (weekSchedule, dayTimes, dayShort, startTime, duration) => {\r\n-  const dayTerms = weekSchedule[dayShort] || [];\r\n+  // Dohvati termine i pauze, default na prazan niz\r\n+  const dayTerms = weekSchedule[dayShort]?.termini || [];\r\n+  const dayBreaks = weekSchedule[dayShort]?.pauze || [];\r\n+\r\n   const dayStartMin = timeToMinutes(dayTimes[dayShort]?.start || \"00:00\");\r\n   const dayEndMin = timeToMinutes(dayTimes[dayShort]?.end || \"23:59\");\r\n \r\n   const startMin = timeToMinutes(startTime);\r\n   const endMin = startMin + duration;\r\n \r\n+  // Provjera radnog vremena\r\n   if (startMin < dayStartMin || endMin > dayEndMin) return false;\r\n \r\n+  // Provjera zauzetih termina\r\n   for (let term of dayTerms) {\r\n     if (term.status === \"otkazan\") continue;\r\n     const termStart = timeToMinutes(term.od);\r\n     const termEnd = timeToMinutes(term.do);\r\n     if (Math.max(startMin, termStart) < Math.min(endMin, termEnd)) return false;\r\n   }\r\n \r\n+  // Provjera pauza\r\n+  for (let brk of dayBreaks) {\r\n+    const breakStart = timeToMinutes(brk.od);\r\n+    const breakEnd = timeToMinutes(brk.do);\r\n+    if (Math.max(startMin, breakStart) < Math.min(endMin, breakEnd)) return false;\r\n+  }\r\n+\r\n   return true;\r\n };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1761142552025,
+            "name": "Commit-0",
+            "content": "export const timeToMinutes = (timeStr) => {\r\n  const [h, m] = timeStr.split(\":\").map(Number);\r\n  return h * 60 + m;\r\n};\r\n\r\nexport const formatIntervalLabel = (h, m) =>\r\n  m === 0 ? `${h}` : `${h}:${String(m).padStart(2, \"0\")}`;\r\n\r\nexport const generateIntervalsForWeek = (dayTimes) => {\r\n  if (Object.keys(dayTimes).length === 0) return [];\r\n  let earliest = \"20:00\";\r\n  let latest = \"07:00\";\r\n\r\n  Object.values(dayTimes).forEach(({ start, end }) => {\r\n    if (start < earliest) earliest = start;\r\n    if (end > latest) latest = end;\r\n  });\r\n\r\n  const [startH, startM] = earliest.split(\":\").map(Number);\r\n  const [endH, endM] = latest.split(\":\").map(Number);\r\n\r\n  const result = [];\r\n  let h = startH;\r\n  let m = startM;\r\n\r\n  while (h < endH || (h === endH && m < endM)) {\r\n    const time = `${String(h).padStart(2, \"0\")}:${String(m).padStart(2, \"0\")}`;\r\n    if (timeToMinutes(time) >= timeToMinutes(`${endH}:${endM}`)) break;\r\n    result.push({ time, label: formatIntervalLabel(h, m) });\r\n    m += 15;\r\n    if (m >= 60) {\r\n      m = 0;\r\n      h += 1;\r\n    }\r\n  }\r\n\r\n  return result;\r\n};\r\n"
+        }
+    ]
+}

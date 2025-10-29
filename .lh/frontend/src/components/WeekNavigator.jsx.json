@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/src/components/WeekNavigator.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1761380332863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761380398112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,14 @@\n import React from \"react\";\r\n \r\n-export default function WeekNavigator({ label, onPrev, onNext }) {\r\n+export default function WeekNavigator({ label, onPrev, onNext, monday }) {\r\n   const today = new Date();\r\n   today.setHours(0, 0, 0, 0);\r\n \r\n-  // Pretpostavljamo da label sadrži datum početka tjedna u formatu YYYY-MM-DD\r\n-  const mondayParts = label.split(\" - \")[0].split(\".\"); // ako label formatiraš \"dd.mm.yyyy - dd.mm.yyyy\"\r\n-  const mondayDate = new Date(+mondayParts[2], +mondayParts[1] - 1, +mondayParts[0]);\r\n-  mondayDate.setHours(0, 0, 0, 0);\r\n+  const mondayCopy = new Date(monday);\r\n+  mondayCopy.setHours(0, 0, 0, 0);\r\n \r\n-  const prevDisabled = mondayDate <= today;\r\n+  const prevDisabled = mondayCopy <= today;\r\n \r\n   return (\r\n     <div className=\"week-nav\">\r\n       <button onClick={onPrev} disabled={prevDisabled}>&lt;</button>\r\n"
+                }
+            ],
+            "date": 1761380332863,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\n\r\nexport default function WeekNavigator({ label, onPrev, onNext }) {\r\n  const today = new Date();\r\n  today.setHours(0, 0, 0, 0);\r\n\r\n  // Pretpostavljamo da label sadrži datum početka tjedna u formatu YYYY-MM-DD\r\n  const mondayParts = label.split(\" - \")[0].split(\".\"); // ako label formatiraš \"dd.mm.yyyy - dd.mm.yyyy\"\r\n  const mondayDate = new Date(+mondayParts[2], +mondayParts[1] - 1, +mondayParts[0]);\r\n  mondayDate.setHours(0, 0, 0, 0);\r\n\r\n  const prevDisabled = mondayDate <= today;\r\n\r\n  return (\r\n    <div className=\"week-nav\">\r\n      <button onClick={onPrev} disabled={prevDisabled}>&lt;</button>\r\n      <span>{label}</span>\r\n      <button onClick={onNext}>&gt;</button>\r\n    </div>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

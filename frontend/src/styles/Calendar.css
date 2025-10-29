@@ -1,0 +1,289 @@
+/* Calendar osnovni stil */
+.calendar {
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #f0f0f0;
+  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar h2 {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f0f0f0;
+}
+
+/* Navigacija tjedna */
+.calendar .week-navigator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+  gap: 1rem;
+  color: #f0f0f0;
+}
+
+.calendar .week-navigator button {
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.calendar .week-navigator button:hover {
+  background-color: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.calendar .week-navigator span {
+  font-weight: 700;
+  font-size: 0.9rem;
+  background-color: #2a2a2a;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+}
+
+/* Tablica */
+.calendar .table-container {
+  flex: 1;
+  overflow: auto;
+  width: 100%;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+
+.calendar table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 900px;
+  font-family: Arial, sans-serif;
+  height: calc(100vh - 100px);
+}
+
+.calendar th,
+.calendar td {
+  border: 1px solid #444;
+  text-align: center;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  line-height: 1.2em;
+  white-space: normal;
+  font-weight: 500;
+}
+
+/* Header tablice */
+.calendar th {
+  background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Sticky prvi stupac (dani) */
+.calendar td.day-cell {
+  position: sticky;
+  left: 0;
+  background: linear-gradient(to right, #2a2a2a, #1f1f1f);
+  opacity: 95%;
+  z-index: 10;
+  font-weight: 600;
+  font-size: 1rem;
+  min-width: 65px;
+  max-width: 75px;
+  text-align: left;
+  padding-left: 1rem;
+  color: #f0f0f0;
+}
+
+/* Gornji lijevi kut */
+.calendar th:first-child {
+  left: 0;
+  z-index: 30;
+}
+
+/* Booked ćelije */
+.calendar td.booked {
+  background: linear-gradient(135deg, #4f8ef7, #1d3fa3);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  padding: 4px 6px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+
+.calendar td.booked:hover {
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.calendar td.booked span {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Prazne ćelije */
+.calendar td.empty-cell {
+  background-color: #333;
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 8px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Responsive mobitel */
+@media (max-width: 768px) {
+  .calendar table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 1rem;
+  }
+
+  .calendar th:first-child,
+  .calendar td:first-child {
+    width: 50px;
+    padding-left: 0.2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    background: linear-gradient(to right, #2a2a2a, #1f1f1f);
+    opacity: 95%;
+  }
+
+  .calendar th:nth-child(2),
+  .calendar th:nth-child(3),
+  .calendar td:nth-child(2),
+  .calendar td:nth-child(3) {
+    width: calc((100% - 50px) / 2);
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .calendar td.day-cell {
+    padding-left: 0.2rem;
+  }
+}
+
+/* Modal overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* poluprozirna crna pozadina */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* Modal content */
+.modal-content {
+  background: #ffffff; /* bijela pozadina */
+  color: #000000; /* tamni tekst */
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+}
+
+/* Inputs unutar modala */
+.modal-content input[type="time"] {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  color: #000;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Pauze i grupiranje inputa */
+.modal-content .pauza-group {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+/* Akcije modala */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.modal-actions button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-actions button:first-child {
+  background-color: #3b82f6; /* plava za Spremi */
+  color: #fff;
+}
+
+.modal-actions button:first-child:hover {
+  background-color: #2563eb;
+}
+
+.modal-actions button:last-child {
+  background-color: #e5e5e5; /* siva za Zatvori */
+  color: #000;
+}
+
+.modal-actions button:last-child:hover {
+  background-color: #d4d4d4;
+}
+
+/* Responsive za mobitele */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .modal-content input[type="time"] {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .modal-actions button {
+    padding: 8px 10px;
+    font-size: 0.95rem;
+  }
+}

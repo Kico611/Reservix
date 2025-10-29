@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/src/styles/App.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1761323018941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761326528673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,7 +17,6 @@\n /* Main content */\n .content {\n   flex: 1;\n   padding: 0px;\n-  overflow-y: auto;\n   background-color: #181818; /* Tamno siva za sadržaj */\n }\n"
+                }
+            ],
+            "date": 1761323018941,
+            "name": "Commit-0",
+            "content": "/* Reset */\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\n.app {\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  font-family: \"Arial\", sans-serif;\n  background-color: #181818; /* Tamno siva, ne potpuno crna */\n  color: #fff;\n}\n\n/* Main content */\n.content {\n  flex: 1;\n  padding: 0px;\n  overflow-y: auto;\n  background-color: #181818; /* Tamno siva za sadržaj */\n}\n"
+        }
+    ]
+}

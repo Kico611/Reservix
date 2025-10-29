@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/src/utils/dateUtils.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1761139450758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761146122560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,19 +16,21 @@\n  * @param {Date} date\r\n  * @returns { monday: Date, sunday: Date, label: string }\r\n  */\r\n export const getWeekRange = (date) => {\r\n-  const dayOfWeek = date.getDay();\r\n+  const dayOfWeek = date.getDay(); // 0 = Ned, 1 = Pon ...\r\n   const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;\r\n \r\n   const monday = new Date(date);\r\n   monday.setDate(date.getDate() + diffToMonday);\r\n+  monday.setHours(0, 0, 0, 0); // reset sati, minute, sekunde, ms\r\n \r\n   const sunday = new Date(monday);\r\n   sunday.setDate(monday.getDate() + 6);\r\n+  sunday.setHours(23, 59, 59, 999); // kraj dana\r\n \r\n   return {\r\n     monday,\r\n     sunday,\r\n     label: `${formatDate(monday)} - ${formatDate(sunday)}`,\r\n   };\r\n-};\r\n+};\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1761139450758,
+            "name": "Commit-0",
+            "content": "// DANI TJEDNA\r\nexport const days = [\"Pon\", \"Uto\", \"Sri\", \"Čet\", \"Pet\", \"Sub\", \"Ned\"];\r\n\r\n/**\r\n * Formatira datum u oblik dd.mm\r\n * @param {Date} date\r\n * @returns string\r\n */\r\nexport const formatDate = (date) =>\r\n  `${String(date.getDate()).padStart(2, \"0\")}.${String(\r\n    date.getMonth() + 1\r\n  ).padStart(2, \"0\")}`;\r\n\r\n/**\r\n * Vraća objekt s početkom i krajem tjedna te labelom\r\n * @param {Date} date\r\n * @returns { monday: Date, sunday: Date, label: string }\r\n */\r\nexport const getWeekRange = (date) => {\r\n  const dayOfWeek = date.getDay();\r\n  const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;\r\n\r\n  const monday = new Date(date);\r\n  monday.setDate(date.getDate() + diffToMonday);\r\n\r\n  const sunday = new Date(monday);\r\n  sunday.setDate(monday.getDate() + 6);\r\n\r\n  return {\r\n    monday,\r\n    sunday,\r\n    label: `${formatDate(monday)} - ${formatDate(sunday)}`,\r\n  };\r\n};\r\n"
+        }
+    ]
+}

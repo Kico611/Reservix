@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/components/ModalsContainer.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761142952495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761142952495,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\nimport TermModal from \"./TermModal\";\r\nimport CancelModal from \"./CancelModal\";\r\nimport FreeModal from \"./FreeModal\";\r\n\r\nexport default function ModalsContainer({\r\n  selectedTerm,\r\n  setSelectedTerm,\r\n  cancelModalOpen,\r\n  setCancelModalOpen,\r\n  termToCancel,\r\n  setTermToCancel,\r\n  freeModalOpen,\r\n  setFreeModalOpen,\r\n  freeTerm,\r\n  confirmCancelReservation,\r\n  handleConfirmCancel,\r\n  canBookInterval,\r\n  salon,\r\n  setNotification\r\n}) {\r\n  return (\r\n    <>\r\n      {selectedTerm && (\r\n        <TermModal\r\n          selectedTerm={selectedTerm}\r\n          salon={salon}\r\n          onClose={() => setSelectedTerm(null)}\r\n          onCancel={confirmCancelReservation}\r\n          onFree={freeTerm}\r\n          canBookInterval={canBookInterval}\r\n          setNotification={setNotification}\r\n        />\r\n      )}\r\n\r\n      {cancelModalOpen && (\r\n        <CancelModal\r\n          termToCancel={termToCancel}\r\n          onClose={() => setCancelModalOpen(false)}\r\n          onConfirm={handleConfirmCancel}\r\n        />\r\n      )}\r\n\r\n      {freeModalOpen && (\r\n        <FreeModal\r\n          selectedTerm={selectedTerm}\r\n          onClose={() => setFreeModalOpen(false)}\r\n          onConfirm={async (term) => {\r\n            await freeTerm(term.datum, term.term);\r\n            setFreeModalOpen(false);\r\n            setSelectedTerm(null);\r\n          }}\r\n        />\r\n      )}\r\n    </>\r\n  );\r\n}\r\n"
+        }
+    ]
+}

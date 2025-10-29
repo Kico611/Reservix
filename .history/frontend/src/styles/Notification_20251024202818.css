@@ -1,0 +1,81 @@
+.notification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  padding: 18px 26px;
+  border-radius: 14px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 3000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateX(140%) scale(0.98);
+  animation: slideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             fadeOut 0.5s 4s ease-in forwards;
+  font-size: 1.05rem;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.25px;
+  pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ✅ Uspjeh */
+.notification.success {
+  background: linear-gradient(135deg, #16a34a, #0f5132);
+  border-left: 6px solid #22c55e;
+}
+
+/* ❌ Greška */
+.notification.error {
+  background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+  border-left: 6px solid #f87171;
+}
+
+/* ⚠️ Upozorenje */
+.notification.warning {
+  background: linear-gradient(135deg, #eab308, #92400e);
+  border-left: 6px solid #fde047;
+  color: #111;
+}
+
+/* ℹ️ Info */
+.notification.info {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  border-left: 6px solid #60a5fa;
+}
+
+/* Animacije */
+@keyframes slideIn {
+  from {
+    transform: translateX(140%) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20%) scale(0.98);
+  }
+}
+
+/* 🔘 Mala dodatna estetika za ikonice (ako ih koristiš) */
+.notification svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}

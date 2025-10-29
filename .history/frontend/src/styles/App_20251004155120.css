@@ -1,0 +1,111 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: "Arial", sans-serif;
+  background-color: #181818; /* Tamno siva, ne potpuno crna */
+  color: #fff;
+}
+
+/* Main content */
+.content {
+  flex: 1;
+  padding: 0px;
+  overflow-y: auto;
+  background-color: #181818; /* Tamno siva za sadržaj */
+}
+
+/* Bottom navigation */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(24, 24, 24, 0.85); /* Slightly transparent */
+  backdrop-filter: blur(10px);
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5); /* non-active icons */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.bottom-nav a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bottom-nav a.active {
+  color: #ffffff; /* Active icon fully white */
+}
+
+.icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.bottom-nav a.active .icon {
+  transform: scale(1.2); /* Enlarge active icon */
+}
+
+.bottom-nav a .label {
+  font-size: 11px;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 480px) {
+  .bottom-nav a .label {
+    font-size: 10px;
+  }
+  .icon {
+    font-size: 20px;
+  }
+}
+
+/* ======= Raspored i termini ======= */
+.schedule-card {
+  background-color: #202020; /* Tamne kartice, ne crne */
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.event {
+  background-color: #1db954; /* Naglašeni termini */
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.event-secondary {
+  background-color: #383838; /* Sekundarni / diskretni termini */
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.event-time {
+  color: #b3b3b3; /* Datum / vrijeme */
+  font-size: 12px;
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".history/frontend/src/App_20251022160419.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761759633400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761759633400,
+            "name": "Commit-0",
+            "content": "// App.jsx\nimport {\n  BrowserRouter as Router,\n  Routes,\n  Route,\n  useLocation,\n} from \"react-router-dom\";\nimport { useState, useEffect } from \"react\";\nimport { onAuthStateChanged } from \"firebase/auth\";\nimport { auth } from \"./firebase\";\nimport ProtectedRoute from \"./components/ProtectedRoute\";\nimport { SalonProvider } from \"./context/SalonContext\";\nimport Home from \"./pages/Home\";\nimport Calendar from \"./pages/Calendar\";\nimport Settings from \"./pages/Settings\";\nimport Profile from \"./pages/Profile\";\nimport Login from \"./pages/Login\";\nimport BottomNav from \"./components/BottomNav\";\nimport \"../src/styles/App.css\";\n\nfunction AppContent() {\n  const [user, setUser] = useState(null);\n  const [loading, setLoading] = useState(true);\n  const location = useLocation();\n\n  useEffect(() => {\n    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {\n      setUser(currentUser);\n      setLoading(false);\n    });\n\n    return () => unsubscribe();\n  }, []);\n\n  if (loading) return <div>Loading...</div>; // loader dok se auth učitava\n\n  const showBottomNav = user && location.pathname !== \"/login\";\n\n  return (\n    <>\n      <main className=\"content\">\n        <Routes>\n          {/* Login ruta */}\n          <Route path=\"/login\" element={<Login setUser={setUser} />} />\n\n          {/* Protected rute */}\n          <Route\n            path=\"/\"\n            element={\n              <ProtectedRoute user={user}>\n                <Home user={user} />\n              </ProtectedRoute>\n            }\n          />\n          <Route\n            path=\"/raspored\"\n            element={\n              <ProtectedRoute user={user}>\n                <Calendar user={user} />\n              </ProtectedRoute>\n            }\n          />\n          <Route\n            path=\"/postavke\"\n            element={\n              <ProtectedRoute user={user}>\n                <Settings user={user} />\n              </ProtectedRoute>\n            }\n          />\n          <Route\n            path=\"/profil\"\n            element={\n              <ProtectedRoute user={user}>\n                <Profile user={user} />\n              </ProtectedRoute>\n            }\n          />\n        </Routes>\n      </main>\n\n      {showBottomNav && <BottomNav />}\n    </>\n  );\n}\n\nexport default function App() {\n  return (\n    <Router>\n      <SalonProvider>\n        <div className=\"app\">\n          <AppContent />\n        </div>\n      </SalonProvider>\n    </Router>\n  );\n}\n"
+        }
+    ]
+}

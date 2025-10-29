@@ -1,0 +1,154 @@
+.table-container {
+    overflow-x: auto;   /* horizontalni scroll */
+  overflow-y: auto;   /* vertikalni scroll */
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 900px;
+  width: 100%;
+  height:calc(100vh - 110px);
+}
+
+table thead th {
+  font-size: 1rem;
+  padding: 0.6rem;
+  font-weight: 500;
+}
+
+th, td {
+  border: 1px solid #444;
+  text-align: center;
+  white-space: normal;
+  padding: 3px;
+  font-size: 0.65rem;
+  line-height: 1em;
+  width: 60px;
+  box-sizing: border-box;
+}
+
+th {
+  background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #444;
+}
+
+.day-cell {
+  position: sticky;
+  left: 0;
+  background: linear-gradient(to right, #2a2a2a, #1f1f1f);
+  opacity: 95%;
+  z-index: 10;
+  font-weight: 540;
+  font-size: 1rem;
+  min-width: 65px;
+  max-width: 75px;
+  width:1%;
+  transition: background-color 0.2s;
+  border-right: 1px solid #444;
+  text-align: left;
+  padding-left: 1rem;
+  color: #f0f0f0;
+
+}
+
+td.out-of-hours {
+  background-color: #333;
+  border: 1px solid #444;
+}
+
+td.break {
+    background-color: #333;
+  border: 1px solid #444;
+}
+
+table th:first-child {
+  left: 0;
+  z-index: 30;
+}
+
+/* booked cells */
+td.booked {
+  background: linear-gradient(135deg, #4f8ef7, #1d3fa3);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.8rem;
+  line-height: 1em;
+  padding: 4px 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+td.booked:hover {
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+
+td.booked span {
+  display: block;
+  font-size: 0.4rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+td:not(.booked):hover {
+  background-color: #333;
+  cursor: pointer;
+}
+
+.day-cell:hover {
+  background-color: #444;
+  cursor: default;
+}
+
+.table-container th:hover {
+  background-color: #3b3b3b;
+  cursor: default;
+}
+
+/* zebra i vikend boje */
+tbody tr:nth-child(odd) td.day-cell { background-color: #2f2f2f; }
+tbody tr:nth-child(even) td.day-cell { background-color: #2a2a2a; }
+tbody tr td.day-cell:nth-child(6),
+tbody tr td.day-cell:nth-child(7) { background-color: #222; color: #ff9a9a; }
+
+@media (max-width: 768px) {
+  table { font-size: 0.6rem; min-width: 750px; }
+  th, td { padding: 3px; font-size: 1rem; }
+  .day-cell { min-width: 50px; max-width: 70px; padding-right: 1rem; }
+  table thead th { padding: 0.45rem; font-weight: 500; }
+}
+
+@media (min-width: 769px) {
+  table { height: calc(100vh - 140px); }
+}
+
+/* Stil za prazne ćelije (nema radnog vremena) */
+td.empty-cell {
+  text-align: left; /* lijevo poravnanje */
+  padding-left: 1rem; /* udaljenost od početka ćelije */
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9rem;
+  background-color: #333;
+  border: 1px solid #444;
+  white-space: normal;
+  overflow: hidden;
+}

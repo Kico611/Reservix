@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/src/styles/ReservationForm.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761144009160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761144009160,
+            "name": "Commit-0",
+            "content": ".reservation-form {\r\n  display:flex;\r\n  flex-direction:column;\r\n  gap:12px;\r\n  padding:20px;\r\n  border-radius:10px;\r\n  background-color:#fff;\r\n  color:#1f1f1f;\r\n  font-family: Arial, sans-serif;\r\n}\r\n\r\n.reservation-form h3 { margin:0; font-size:1.3rem; font-weight:700; text-align:center; }\r\n.reservation-form .form-group { display:flex; flex-direction:column; gap:5px; }\r\n.reservation-form label { font-weight:600; font-size:0.95rem; }\r\n.reservation-form select,\r\n.reservation-form input[type=\"text\"] { padding:8px 10px; border:1px solid #ccc; border-radius:6px; font-size:1rem; }\r\n.reservation-form input[disabled] { background-color:#f0f0f0; color:#555; }\r\n.reservation-form .form-actions { display:flex; justify-content:space-between; gap:10px; margin-top:10px; }\r\n.reservation-form button { flex:1; padding:10px; border:none; border-radius:6px; font-weight:600; cursor:pointer; transition: background 0.2s, transform 0.1s; }\r\n.reservation-form button:first-child { background-color:#3b82f6; color:#fff; }\r\n.reservation-form button:first-child:hover { background-color:#2563eb; transform:translateY(-1px); }\r\n.reservation-form button:last-child { background-color:#f0f0f0; color:#1f1f1f; }\r\n.reservation-form button:last-child:hover { background-color:#dcdcdc; }\r\n"
+        }
+    ]
+}

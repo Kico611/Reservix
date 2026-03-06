@@ -196,13 +196,8 @@ saloni/
 
 ## 🌐 Live demo
 
-- **Frontend demo:** [Link](#)
-- **WhatsApp demo:** [Video](#)
+- **Frontend demo:** [Link](https://www.youtube.com/watch?v=X0nRnJ2sYx4)
+- **WhatsApp demo:** [Video](https://www.instagram.com/reel/DRJ_tfRCKWH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA%3D%3D)
 
 ---
 
-## 👤 Autor
-
-**Kristijan Balić**
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://linkedin.com/in/kristijan-balic)
-[![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/Kico611)

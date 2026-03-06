@@ -1,7 +1,6 @@
 # Reservix 📅
 
-> Fullstack sustav za upravljanje rezervacijama salona — korisnici rezerviraju termine putem **WhatsApp-a**, a vlasnici upravljaju rasporedom kroz **React dashboard**. Aktivno korišten u produkciji od strane 20–30 korisnika dnevno.
-
+> Fullstack sustav za upravljanje rezervacijama salona — korisnici rezerviraju termine putem **WhatsApp-a**, a vlasnici upravljaju rasporedom kroz **React dashboard**
 ---
 
 ## 🧩 O projektu
